@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Agro Hub</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="style.css" class="css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    
+    <link rel="shortcut icon" href="https://i.postimg.cc/R07Wy2gJ/favicon.png" type="image/x-icon">
+</head>
+<!-- Place this in the <head> section of all your HTML pages -->
+<script type="text/javascript">
+  var _smartsupp = _smartsupp || {};
+  _smartsupp.key = '192fbc3a15b490b377f007b39c1e2158caf93108';
+  window.smartsupp || (function(d) {
+    var s, c, o = smartsupp = function() { o._.push(arguments) }; o._ = [];
+    s = d.getElementsByTagName('script')[0];
+    c = d.createElement('script');
+    c.type = 'text/javascript';
+    c.charset = 'utf-8';
+    c.async = true;
+    c.src = 'https://www.smartsuppchat.com/loader.js?';
+    s.parentNode.insertBefore(c, s);
+  })(document);
+</script>
+<noscript> 
+  Powered by <a href="https://www.smartsupp.com" target="_blank">Smartsupp</a>
+</noscript>
+<body>
+    <header>
+
+
+
+
+         <div class="my-nav fixed" id="menuitems" >
+             <!-- <a href="#" class="header-logo"><img src="images/Agrologo.png" alt="logo" width="120" height="120"></a>
+               -->
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                   <li >
+                        <a href="#new-product" class="menu-title">New Products</a>
+                    </li>
+
+                    <li >
+                        <a href="#" class="menu-title">Our Services</a>
+                    </li>
+                    <li > <a href="#cat" class="menu-title">Categories</a></li>
+                   
+                </ul>
+            </nav>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="header-top">
+            <div class="container">
+                <ul class="header-social-container">
+                    <li><a href="#" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                    <li><a href="#" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                    <li><a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                    <li><a href="#" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                </ul>
+
+                <div class="header-alert-news">
+                    <p><b>Free Shipping</b> This week Order Over - $55</p>
+                </div>
+
+                <div class="header-top-actions">
+                    <select id="currency" name="currency">
+                        <option value="ngn">USD &dollar;</option>
+                        <option value="usd">NGN  &#8358; </option>
+                        <option value="eur">EUR &euro;</option>
+                        
+                    </select>
+
+                    <select name="language">
+                        <option value="en-US">English</option>
+                        <option value="es-ES">Espa&ntilde;ol</option>
+                        <option value="fr">Fran&ccedil;ais</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <a href="#" class="header-logo"><img src="images/logoback.jpg" alt="logo" width="120" height="120" ></a>
+                
+
+                <div class="header-search-container">
+                    <input type="search"  name="search" class="search-field" placeholder="Enter your product name">
+
+                    <button class="search-btn" id="sach"><ion-icon name="search-outline"></ion-icon></button>
+                </div>
+
+                <div class="header-user-actions">
+                    <button class="action-btn"><ion-icon name="person-outline"></ion-icon></button>
+
+                    <button class="action-btn">
+                        <ion-icon name="heart-outline"></ion-icon>
+                        <span class="count">0</span>
+                    </button>
+
+                    <button class="action-btn">
+                        <a href="cart.html"><ion-icon name="bag-handle-outline"></ion-icon></a>
+                        <span class="count">0</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+       
+
+
+
+
+
+
+
+
+
+        <nav class="desktop-navigation-menu">
+            <div class="container">
+                <ul class="desktop-menu-category-list">
+                    <li class="menu-category">
+                        <a href="index.html" class="menu-title">Home</a>
+                    </li>
+
+                    <li class="menu-category"> <a href="#cat" class="menu-title">Categories</a></li>
+                 <li class="menu-category">
+                        <a href="#new-product" class="menu-title">New Products</a>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">Our Services</a>
+                    </li>
+
+                    <li class="menu-category">
+                        <a href="#" class="menu-title">About Us</a>
+                    </li>
+
+                
+                </ul>
+            </div>
+        </nav>
+
+        <div class="mobile-bottom-navigation">
+            <button onclick="menu()" class="action-btn" data-mobile-menu-open-btn>
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
+
+            <button class="action-btn">
+               <a href="cart.html"> <ion-icon name="bag-handle-outline"></ion-icon></a>
+                <span class="count">0</span>
+            </button>
+
+            <button class="action-btn">
+                <ion-icon name="home-outline"></ion-icon>
+            </button>
+
+            <!-- <button class="action-btn">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span class="count">0</span>
+            </button>
+
+            <button class="action-btn" data-mobile-menu-open-btn>
+                <ion-icon name="grid-outline"></ion-icon>
+            </button> -->
+        </div>
+
+        <nav class="mobile-navigation-menu has-scrollbar " data-mobile-menu>
+            <div class="menu-top">
+                <h2 class="menu-title">Menu</h2>
+
+                <button class="menu-close-btn" data-mobile-menu-close-btn>
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+
+            <ul class="mobile-menu-category-list">
+                <li class="menu-category"><a href="#" class="menu-title">Home</a></li>
+
+                <li class="menu-category">
+                    <button class="accordion-menu" data-accordion-btn>
+                        <p class="menu-title">Men's</p>
+
+                        <div>
+                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+                        </div>
+                    </button>
+
+            <div class="menu-bottom">
+                <ul class="menu-category-list">
+                    <li class="menu-category">
+                        <button class="accordion-menu " data-accordion-btn>
+                            <p class="menu-title">Language</p>
+                            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+                        </button>
+
+                        <ul class="submenu-category-list " data-accordion>
+                            <li class="submenu-category"><a href="#" class="submenu-title">English</a></li>
+                            <li class="submenu-category"><a href="#" class="submenu-title">Espa&ntilde;ol</a></li>
+                            <li class="submenu-category"><a href="#" class="submenu-title">French</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-category">
+                        <button class="accordion-menu" data-accordion-btn>
+                            <p class="menu-title">Currency</p>
+                            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+                        </button>
+                   
+                        
+                        <ul class="submenu-category-list" data-accordion>
+                            <li class="submenu-category"><a href="#" class="submenu-title">NGN &#8358;</a></li>
+                            <li class="submenu-category"><a href="#" class="submenu-title">EUR &euro;</a></li>
+                           <li class="submenu-category"><a href="#"  class="submenu-title">USD &dollar;</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="menu-social-container">
+                    <li><a href="#" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                    <li><a href="#" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                    <li><a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                    <li><a href="#" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="cart-container">
+            <div class="container">
+                <h1 class="cart-title">Your Shopping Cart</h1>
+                
+                <div class="cart-content">
+                    <div class="cart-items">
+                        <!-- Cart items will be loaded here via JavaScript -->
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <h3>Order Summary</h3>
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span class="subtotal">₦0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span class="shipping">₦0.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span class="total-price" id="total">₦0.00</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary checkout-btn" id="keep">Proceed to Checkout</button>
+                        <a href="index.html" class="continue-shopping">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (same as your main page) -->
+ 
+    <footer>
+        <div class="footer-category">
+            <div class="container">
+                <h2 class="footer-category-title">Brand Directory</h2>
+
+                <div class="footer-category-box">
+                    <h3 class="category-box-title">Fashion :</h3>
+
+                    <a href="#" class="footer-category-link">T-Shirt</a>
+                    <a href="#" class="footer-category-link">Shirts</a>
+                    <a href="#" class="footer-category-link">Shorts & Jeans</a>
+                    <a href="#" class="footer-category-link">Jacket</a>
+                    <a href="#" class="footer-category-link">Dress & Frock</a>
+                    <a href="#" class="footer-category-link">Innerwear</a>
+                    <a href="#" class="footer-category-link">Hosiery</a>
+                </div>
+
+                <div class="footer-category-box">
+                    <h3 class="category-box-title">Footwear :</h3>
+
+                    <a href="#" class="footer-category-link">Sport</a>
+                    <a href="#" class="footer-category-link">Formal</a>
+                    <a href="#" class="footer-category-link">Boots</a>
+                    <a href="#" class="footer-category-link">Casual</a>
+                    <a href="#" class="footer-category-link">Cowboy Shoes</a>
+                    <a href="#" class="footer-category-link">Safety Shoes</a>
+                    <a href="#" class="footer-category-link">Party Wear Shoes</a>
+                    <a href="#" class="footer-category-link">Branded</a>
+                    <a href="#" class="footer-category-link">Firstcopy</a>
+                    <a href="#" class="footer-category-link">Long Shoes</a>
+                </div>
+
+                <div class="footer-category-box">
+                    <h3 class="category-box-title">Jewellery :</h3>
+
+                    <a href="#" class="footer-category-link">Necklace</a>
+                    <a href="#" class="footer-category-link">Earrings</a>
+                    <a href="#" class="footer-category-link">Couple Rings</a>
+                    <a href="#" class="footer-category-link">Pendant</a>
+                    <a href="#" class="footer-category-link">Crystal</a>
+                    <a href="#" class="footer-category-link">Bangles</a>
+                    <a href="#" class="footer-category-link">Bracelets</a>
+                    <a href="#" class="footer-category-link">Nosepin</a>
+                    <a href="#" class="footer-category-link">Chain</a>
+                </div>
+
+                <div class="footer-category-box">
+                    <h3 class="category-box-title">Cosmetics :</h3>
+
+                    <a href="#" class="footer-category-link">Shampoo</a>
+                    <a href="#" class="footer-category-link">Bodywash</a>
+                    <a href="#" class="footer-category-link">Facewash</a>
+                    <a href="#" class="footer-category-link">Makeup Kit</a>
+                    <a href="#" class="footer-category-link">Liner</a>
+                    <a href="#" class="footer-category-link">Lipstick</a>
+                    <a href="#" class="footer-category-link">Perfume</a>
+                    <a href="#" class="footer-category-link">Body Soap</a>
+                    <a href="#" class="footer-category-link">Scrub</a>
+                    <a href="#" class="footer-category-link">Hair Gel</a>
+                    <a href="#" class="footer-category-link">Hair Colors</a>
+                    <a href="#" class="footer-category-link">Hair Dye</a>
+                    <a href="#" class="footer-category-link">Sunscreen</a>
+                    <a href="#" class="footer-category-link">Skin Loson</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <div class="container">
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><h2 class="nav-title">Popular Categories</h2></li>
+                    
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Fashion</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Electronic</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Cosmetic</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Health</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Watches</a></li>
+                </ul>
+
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><h2 class="nav-title">Products</h2></li>
+                    
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Fashion</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Electronic</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Cosmetic</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Health</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Watches</a></li>
+                </ul>
+
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><h2 class="nav-title">Our Company</h2></li>
+                    
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Delivery</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Legal Notice</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Terms and Conditions</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">About us</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Secure Payment</a></li>
+                </ul>
+
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><h2 class="nav-title">Services</h2></li>
+                    
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Prices Drop</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">New Products</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Best Sales</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Contact us</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Sitemap</a></li>
+                </ul>
+
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><h2 class="nav-title">Contact</h2></li>
+
+                    <li class="footer-nav-item flex">
+                        <div class="icon-box">
+                            <ion-icon name="location-outline"></ion-icon>
+                        </div>
+
+                        <address class="content">
+                            419 State 414 Rte
+                            Beaver Dams, New York(NY), 14812, USA
+                        </address>
+                    </li>
+
+                    <li class="footer-nav-item flex">
+                        <div class="icon-box">
+                            <ion-icon name="call-outline"></ion-icon>
+                        </div>
+
+                        <a href="tel:+607936-8058" class="footer-nav-link">(607) 936-8058</a>
+                    </li>
+
+                    <li class="footer-nav-item flex">
+                        <div class="icon-box">
+                            <ion-icon name="mail-outline"></ion-icon>
+                        </div>
+
+                        <a href="mailto:example@gmail.com" class="footer-nav-link">example@gmail.com</a>
+                    </li>
+                </ul>
+
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><h2 class="nav-title">Follow Us</h2></li>
+
+                    <li>
+                        <ul class="social-link">
+                            <li class="footer-nav-item">
+                                <a href="#" class="footer-nav-link"><ion-icon name="logo-facebook"></ion-icon></a>
+                            </li>
+
+                            <li class="footer-nav-item">
+                                <a href="#" class="footer-nav-link"><ion-icon name="logo-twitter"></ion-icon></a>
+                            </li>
+
+                            <li class="footer-nav-item">
+                                <a href="#" class="footer-nav-link"><ion-icon name="logo-linkedin"></ion-icon></a>
+                            </li>
+
+                            <li class="footer-nav-item">
+                                <a href="#" class="footer-nav-link"><ion-icon name="logo-instagram"></ion-icon></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <img src="https://i.postimg.cc/43GKnVFF/payment.png" alt="payment method" class="payment-img">
+                <p class="copyright">Copyright &copy; <a href="#">Anon</a> all rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+
+
+    <script>
+console.log("Cart contents:", JSON.parse(localStorage.getItem('cart')));
+</script>
+    <script>
+let total = document.querySelector('.total-price');
+
+
+  var Menuitems = document.getElementById("menuitems");
+    var myNav = document.querySelector(".my-nav"); 
+
+    Menuitems.style.maxHeight = "0px";
+
+    function menu() {
+        if (Menuitems.style.maxHeight == "0px") {
+            Menuitems.style.maxHeight = "250px";
+            myNav.style.top = "0"; // Slide down the navbar
+        } else {
+            Menuitems.style.maxHeight = "0px";
+            myNav.style.top = "-270px"; // Slide the navbar back up
+        }
+    }
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const subtotalElement = document.querySelector('.subtotal');
+            const totalElement = document.querySelector('.total-price');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <ion-icon name="cart-outline" class="empty-cart-icon"></ion-icon>
+                        <h3>Your cart is empty</h3>
+                        <p>Looks like you haven't added anything to your cart yet</p>
+                        <a href="index.html" class="btn btn-primary">Start Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-name">${item.name}</h4>
+                        <p class="cart-item-category">${item.category}</p>
+                        <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" data-id="${item.id}">
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                `;
+                
+                cartItemsContainer.appendChild(cartItem);
+                
+            });
+            
+            // Update totals
+            subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            totalElement.textContent = `$${subtotal.toFixed(2)}`;
+            
+            // Add event listeners for quantity changes
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const isPlus = this.classList.contains('plus');
+                    updateQuantity(id, isPlus);
+                });
+            });
+            
+            // Add event listeners for remove buttons
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    removeItem(id);
+                });
+            });
+            
+            function updateQuantity(id, isPlus) {
+                const cart = JSON.parse(localStorage.getItem('cart'));
+                const itemIndex = cart.findIndex(item => item.id === id);
+                
+                if (itemIndex !== -1) {
+                    if (isPlus) {
+                        cart[itemIndex].quantity += 1;
+                    } else {
+                        if (cart[itemIndex].quantity > 1) {
+                            cart[itemIndex].quantity -= 1;
+                        } else {
+                            // Remove item if quantity reaches 0
+                            cart.splice(itemIndex, 1);
+                        }
+                    }
+                    
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    location.reload(); // Refresh to show updated cart
+                }
+            }
+            
+            function removeItem(id) {
+                const cart = JSON.parse(localStorage.getItem('cart'));
+                const updatedCart = cart.filter(item => item.id !== id);
+                localStorage.setItem('cart', JSON.stringify(updatedCart));
+                location.reload(); // Refresh to show updated cart
+            }
+        });
+    </script>
+</body>
+</html>

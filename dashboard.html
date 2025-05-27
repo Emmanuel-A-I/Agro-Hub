@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Hub | Farmer Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #60ad5e;
+            --primary-dark: #005005;
+            --secondary: #ff8f00;
+            --secondary-light: #ffc046;
+            --secondary-dark: #c56000;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --background: #f5f7fa;
+            --card-bg: #ffffff;
+            --error: #d32f2f;
+            --success: #388e3c;
+            --warning: #ffa000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        /* Dashboard Sections */
+        .section {
+            display: none;
+            margin: 30px 0;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Profile Hero */
+        .profile-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .profile-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-hero h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .profile-hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Dashboard Grid */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .user-card {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+            cursor: pointer;
+        }
+
+        .user-card h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .user-card p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .user-badge {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--white);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .menu {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .menu li {
+            margin-bottom: 10px;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .menu a:hover, .menu a.active {
+            background-color: rgba(46, 125, 50, 0.1);
+            color: var(--primary);
+        }
+
+        /* Weather Widget */
+        .weather-card {
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .weather-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .weather-header h4 {
+            font-size: 16px;
+        }
+
+        .weather-main {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .weather-icon {
+            font-size: 40px;
+            margin-right: 15px;
+        }
+
+        .weather-temp {
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .weather-detail {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-header h3 {
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .card-header a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Market Table */
+        .market-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .market-table th, .market-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .market-table th {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .market-table tr:hover {
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .price-change {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .price-up {
+            background-color: rgba(56, 142, 60, 0.1);
+            color: var(--success);
+        }
+
+        .price-down {
+            background-color: rgba(211, 47, 47, 0.1);
+            color: var(--error);
+        }
+
+        .price-neutral {
+            background-color: rgba(255, 160, 0, 0.1);
+            color: var(--warning);
+        }
+
+        /* AI Recommendations */
+        .ai-recommendations {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .recommendation-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        .recommendation-card h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .recommendation-card p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .recommendation-card .action {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Recent Activity */
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(46, 125, 50, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+
+        .activity-details h4 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .activity-details p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .activity-time {
+            margin-left: auto;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Marketplace */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Logistics */
+        .logistics-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .logistics-table th, .logistics-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logistics-table th {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .logistics-table tr:hover {
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: rgba(255, 160, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .status-delivered {
+            background-color: rgba(56, 142, 60, 0.1);
+            color: var(--success);
+        }
+
+        .status-shipped {
+            background-color: rgba(33, 150, 243, 0.1);
+            color: #2196f3;
+        }
+
+        /* List Produce Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            .ai-recommendations {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .profile-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Added styles for edit functionality */
+        .edit-name-form {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .edit-name-form input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        .edit-name-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .edit-name-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        #profile-pic-upload {
+            display: none;
+        }
+
+        /* My Products Section */
+        #my-products-section {
+            display: none;
+        }
+
+        .my-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="images/logoback.jpg" alt="Agro Hub Logo">
+                    <h1>AGRO <span>HUB</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-section="marketplace">Marketplace</a></li>
+                    <li><a href="#" class="nav-link" data-section="logistics">Logistics</a></li>
+                    <li><a href="#" class="nav-link" data-section="buy">Financing</a></li>
+                    <li><a href="#" class="nav-link" data-section="analytics">Analytics</a></li>
+                </ul>
+                <div class="user-actions">
+                    <button class="btn btn-outline">Support</button>
+                    <button class="btn btn-primary" id="list-produce-btn">List Produce</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <div class="container">
+        <section id="dashboard" class="section active">
+            <div class="profile-hero">
+                <div class="profile-hero-content">
+                    <h2 id="welcome-message">Welcome Back, Mrs.Ngozi Okonkwo</h2>
+                    <p id="user-description">Maize Farmer | Anambra State | Member Since 2023</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <h3>₦2.4M</h3>
+                            <p>Total Earnings</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>87</h3>
+                            <p>Transactions</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>4.9★</h3>
+                            <p>Buyer Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="user-card">
+                        <input type="file" id="profile-pic-upload" accept="image/*">
+                        <img src="images/ngozi.jpeg" alt="User Avatar" class="user-avatar" id="user-avatar">
+                        <h3 id="user-name-display">Mrs. Okonkwo <button class="edit-name-btn" id="edit-name-btn"><i class="fas fa-edit"></i></button></h3>
+                        <div class="edit-name-form" id="edit-name-form">
+                            <input type="text" id="new-name-input" value="Mrs. Okonkwo">
+                            <div class="edit-name-buttons">
+                                <button class="btn btn-primary btn-sm" id="save-name-btn">Save</button>
+                                <button class="btn btn-outline btn-sm" id="cancel-edit-btn">Cancel</button>
+                            </div>
+                        </div>
+                        <p id="user-details">Maize Farmer | Ogun State</p>
+                        <span class="user-badge">Verified Seller</span>
+                        <a href="login.html"><span>Log out</span></a>
+                    </div>
+
+                    <ul class="menu">
+                        <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="#" id="my-products-link"><i class="fas fa-shopping-basket"></i> My Products</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                        <li><a href="#"><i class="fas fa-truck"></i> Logistics</a></li>
+                        <li><a href="#"><i class="fas fa-wallet"></i> Payments</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
+                        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    </ul>
+
+                    <!-- Weather Widget -->
+                    <div class="weather-card">
+                        <div class="weather-header">
+                            <h4>Weather Forecast</h4>
+                            <i class="fas fa-map-marker-alt"></i> Ogun State
+                        </div>
+                        <div class="weather-main">
+                            <div class="weather-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="weather-temp">
+                                <span id="current-temp">28°C</span>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <div class="weather-detail">
+                                <i class="fas fa-tint"></i> <span id="humidity">65%</span> Humidity
+                            </div>
+                            <div class="weather-detail">
+                                <i class="fas fa-wind"></i> <span id="wind-speed">12 km/h</span> Wind
+                            </div>
+                            <div class="weather-detail">
+                                <i class="fas fa-cloud-rain"></i> <span id="rain-chance">20%</span> Rain
+                            </div>
+                            <div class="weather-detail">
+                                <i class="fas fa-calendar-day"></i> <span id="forecast-date">Today</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="main-content">
+                    <!-- Market Highlights -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Market Highlights</h3>
+                            <a href="#" class="nav-link" data-section="marketplace">View All <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <table class="market-table">
+                            <thead>
+                                <tr>
+                                    <th>Commodity</th>
+                                    <th>Current Price</th>
+                                    <th>Change (24h)</th>
+                                    <th>Demand Level</th>
+                                    <th>Top Buying Region</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Maize</td>
+                                    <td>₦25,000/bag</td>
+                                    <td><span class="price-change price-up">+5.2%</span></td>
+                                    <td><i class="fas fa-fire" style="color: var(--secondary);"></i> High</td>
+                                    <td>Lagos</td>
+                                </tr>
+                                <tr>
+                                    <td>Rice</td>
+                                    <td>₦32,000/bag</td>
+                                    <td><span class="price-change price-neutral">+0.8%</span></td>
+                                    <td><i class="fas fa-chart-line" style="color: var(--success);"></i> Moderate</td>
+                                    <td>Kano</td>
+                                </tr>
+                                <tr>
+                                    <td>Cassava</td>
+                                    <td>₦15,000/tubber</td>
+                                    <td><span class="price-change price-down">-2.1%</span></td>
+                                    <td><i class="fas fa-chart-line" style="color: var(--success);"></i> Moderate</td>
+                                    <td>Oyo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- AI Recommendations -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>AI-Powered Recommendations</h3>
+                            <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="ai-recommendations">
+                            <div class="recommendation-card">
+                                <h4>Sell Now for Best Price</h4>
+                                <p>Maize prices in Lagos are 12% higher than last week. List your produce now to maximize profit.</p>
+                                <span class="action">List Now <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="recommendation-card">
+                                <h4>Storage Optimization</h4>
+                                <p>Reduce post-harvest losses by 30% with our smart storage partners in Ogun State.</p>
+                                <span class="action">Learn More <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Activity</h3>
+                            <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Payment Received</h4>
+                                    <p>₦150,000 for 6 bags of maize</p>
+                                </div>
+                                <div class="activity-time">
+                                    2 hours ago
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Delivery Confirmed</h4>
+                                    <p>Buyer in Lagos received your order</p>
+                                </div>
+                                <div class="activity-time">
+                                    1 day ago
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>New Rating</h4>
+                                    <p>5★ from Dangote Flour Mills</p>
+                                </div>
+                                <div class="activity-time">
+                                    3 days ago
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Products Section -->
+        <section id="my-products-section" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>My Listed Products</h3>
+                    <a href="#" class="nav-link" data-section="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                </div>
+                <div class="my-products-grid" id="my-products-list">
+                    <!-- User's products will be displayed here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketplace Section -->
+        <section id="marketplace" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>High Demand Products</h3>
+                    <a href="#" class="nav-link" data-section="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                </div>
+                <div class="product-grid" id="marketplace-products">
+                    <!-- Marketplace products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Logistics Section -->
+          <section id="logistics" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Shipping companies</h3>
+                </div>
+            </div>
+          </section>
+        <section id="logistics" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Your Shipments</h3>
+                    <a href="#" class="nav-link" data-section="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                </div>
+                <table class="logistics-table">
+                    <thead>
+                        <tr>
+                            <th>Tracking ID</th>
+                            <th>Product</th>
+                            <th>Destination</th>
+                            <th>Status</th>
+                            <th>Estimated Delivery</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logistics-data">
+                        <!-- Logistics data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Financing Section -->
+        <section id="buy" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Financing Options</h3>
+                    <a href="#" class="nav-link" data-section="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                </div>
+                <div class="product-grid" id="agrohub-products">
+                    <!-- Agro Hub products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Farm Analytics</h3>
+                    <a href="#" class="nav-link" data-section="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                </div>
+                <div class="ai-recommendations">
+                    <div class="recommendation-card">
+                        <h4>Yield Prediction</h4>
+                        <p>Based on current conditions, your maize yield is predicted to be 15% higher than last season.</p>
+                        <span class="action">View Details <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4>Market Trends</h4>
+                        <p>Maize prices are expected to rise by 8% in the next quarter based on current demand.</p>
+                        <span class="action">View Report <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- List Produce Form -->
+        <section id="list-produce" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>List Your Produce</h3>
+                    <a href="#" class="nav-link" data-section="dashboard"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                </div>
+                <form id="produce-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" id="product-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-type">Product Type</label>
+                            <select id="product-type" class="form-control" required>
+                                <option value="">Select type</option>
+                                <option value="maize">Maize</option>
+                                <option value="rice">Rice</option>
+                                <option value="cassava">Cassava</option>
+                                <option value="soybeans">Soybeans</option>
+                                <option value="tomatoes">Tomatoes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantity">Quantity (kg/bags)</label>
+                            <input type="number" id="quantity" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price per Unit (₦)</label>
+                            <input type="number" id="price" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Product Description</label>
+                        <textarea id="description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image">Product Image</label>
+                        <input type="file" id="product-image" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">List Produce</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About Agro Hub</h4>
+                    <p>Agro Hub is Nigeria's premier digital agricultural marketplace connecting farmers directly to buyers, reducing waste, and increasing profits.</p>
+                    <div style="margin-top: 15px;">
+                        <a href="#" style="color: var(--white); margin-right: 10px;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: var(--white); margin-right: 10px;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--white); margin-right: 10px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--white);"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="nav-link" data-section="dashboard">Home</a></li>
+                        <li><a href="#" class="nav-link" data-section="marketplace">Marketplace</a></li>
+                        <li><a href="#" class="nav-link" data-section="logistics">Logistics</a></li>
+                        <li><a href="#" class="nav-link" data-section="buy">Financing</a></li>
+                        <li><a href="#" class="nav-link" data-section="analytics">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Farmer's Guide</a></li>
+                        <li><a href="#">Market Trends</a></li>
+                        <li><a href="#">Agricultural Tips</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i> 123 Agric Street, Lagos, Nigeria</li>
+                        <li><i class="fas fa-phone" style="margin-right: 5px;"></i> +234 812 345 6789</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 5px;"></i> info@agrohub.ng</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Agro Hub. All Rights Reserved. | Revolutionizing Nigeria's Agricultural Future</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample Data
+        const products = [
+            {
+                id: 1,
+                name: "Premium Maize",
+                type: "maize",
+                price: 25000,
+                unit: "bag",
+                demand: "high",
+                location: "Ogun",
+                description: "High quality yellow maize, freshly harvested",
+                image: "https://images.unsplash.com/photo-1605000797499-95e51c52685e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 2,
+                name: "Ofada Rice",
+                type: "rice",
+                price: 32000,
+                unit: "bag",
+                demand: "high",
+                location: "Lagos",
+                description: "Organic Ofada rice, locally processed",
+                image: "https://images.unsplash.com/photo-1547496502-affa22d38842?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 3,
+                name: "Fresh Cassava",
+                type: "cassava",
+                price: 15000,
+                unit: "tubber",
+                demand: "medium",
+                location: "Oyo",
+                description: "Fresh cassava tubers, suitable for processing",
+                image: "https://images.unsplash.com/photo-1603048719537-93a6a5f89bc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 4,
+                name: "Soybeans",
+                type: "soybeans",
+                price: 28500,
+                unit: "bag",
+                demand: "high",
+                location: "Kano",
+                description: "Premium quality soybeans, high protein content",
+                image: "https://images.unsplash.com/photo-1595475212599-7c3b2a0c5e3d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 5,
+                name: "Fresh Tomatoes",
+                type: "tomatoes",
+                price: 8000,
+                unit: "basket",
+                demand: "high",
+                location: "Kaduna",
+                description: "Freshly harvested tomatoes, perfect for markets",
+                image: "https://images.unsplash.com/photo-1594282418426-62d5f2d2b371?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        const agroHubProducts = [
+            {
+                id: 101,
+                name: "Agro Hub Maize Seeds",
+                type: "seeds",
+                price: 5000,
+                unit: "pack",
+                description: "High yield maize seeds, resistant to drought",
+                image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 102,
+                name: "Organic Fertilizer",
+                type: "fertilizer",
+                price: 12000,
+                unit: "bag",
+                description: "100% organic fertilizer for improved yield",
+                image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 103,
+                name: "Farming Tools Kit",
+                type: "tools",
+                price: 25000,
+                unit: "set",
+                description: "Complete set of farming tools for smallholders",
+                image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 104,
+                name: "Agricultural Loan",
+                type: "financing",
+                price: 0,
+                unit: "N/A",
+                description: "Low-interest loans for farm expansion and equipment",
+                image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        const logistics = [
+            {
+                id: "TRK-2024-001",
+                product: "Maize (10 bags)",
+                destination: "Lagos",
+                status: "delivered",
+                date: "2024-05-15"
+            },
+            {
+                id: "TRK-2024-002",
+                product: "Rice (5 bags)",
+                destination: "Abuja",
+                status: "shipped",
+                date: "2024-05-20"
+            },
+            {
+                id: "TRK-2024-003",
+                product: "Cassava (20 tubbers)",
+                destination: "Ibadan",
+                status: "pending",
+                date: "2024-05-25"
+            }
+        ];
+
+        // User's listed products
+        let userProducts = [
+            {
+                id: 6,
+                name: "Organic Maize",
+                type: "maize",
+                price: 28000,
+                unit: "bag",
+                location: "Ogun",
+                description: "Organically grown maize, no pesticides used",
+                image: "https://images.unsplash.com/photo-1605000797499-95e51c52685e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                listedDate: "2024-05-10"
+            },
+            {
+                id: 7,
+                name: "Fresh Yam",
+                type: "yam",
+                price: 18000,
+                unit: "tubber",
+                location: "Ogun",
+                description: "Fresh yam tubers from this season's harvest",
+                image: "https://images.unsplash.com/photo-1605000797499-95e51c52685e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                listedDate: "2024-05-15"
+            }
+        ];
+
+        // DOM Elements
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const listProduceBtn = document.getElementById('list-produce-btn');
+        const produceForm = document.getElementById('produce-form');
+        const marketplaceProducts = document.getElementById('marketplace-products');
+        const agrohubProducts = document.getElementById('agrohub-products');
+        const logisticsData = document.getElementById('logistics-data');
+        const myProductsList = document.getElementById('my-products-list');
+        const myProductsLink = document.getElementById('my-products-link');
+        const myProductsSection = document.getElementById('my-products-section');
+        const userAvatar = document.getElementById('user-avatar');
+        const profilePicUpload = document.getElementById('profile-pic-upload');
+        const editNameBtn = document.getElementById('edit-name-btn');
+        const editNameForm = document.getElementById('edit-name-form');
+        const newNameInput = document.getElementById('new-name-input');
+        const saveNameBtn = document.getElementById('save-name-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const userNameDisplay = document.getElementById('user-name-display');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const userDescription = document.getElementById('user-description');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMarketplaceProducts();
+            loadAgroHubProducts();
+            loadLogisticsData();
+            loadUserProducts();
+            
+            // Fetch weather data
+            fetchWeather();
+        });
+
+        // Navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = link.getAttribute('data-section');
+                showSection(sectionId);
+                
+                // Update active nav link
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        // Show List Produce Form
+        listProduceBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('list-produce');
+            
+            // Update active nav link
+            navLinks.forEach(nav => nav.classList.remove('active'));
+        });
+
+        // Form Submission
+        produceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const productName = document.getElementById('product-name').value;
+            const productType = document.getElementById('product-type').value;
+            const quantity = document.getElementById('quantity').value;
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+            const location = document.getElementById('location').value;
+            const productImage = document.getElementById('product-image').files[0];
+            
+            // Create new product object
+            const newProduct = {
+                id: Date.now(), // Use timestamp as temporary ID
+                name: productName,
+                type: productType,
+                price: parseInt(price),
+                unit: productType === 'maize' || productType === 'rice' ? 'bag' : 
+                      productType === 'cassava' || productType === 'yam' ? 'tubber' : 'kg',
+                location: location,
+                description: description,
+                image: productImage ? URL.createObjectURL(productImage) : 'https://images.unsplash.com/photo-1605000797499-95e51c52685e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                listedDate: new Date().toISOString().split('T')[0]
+            };
+            
+            // Add to user's products
+            userProducts.push(newProduct);
+            loadUserProducts();
+            
+            alert('Your produce has been listed successfully!');
+            produceForm.reset();
+            showSection('dashboard');
+            
+            // Update active nav link
+            navLinks[0].classList.add('active');
+        });
+
+        // Show My Products Section
+        myProductsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('my-products-section');
+            
+            // Update active nav link
+            navLinks.forEach(nav => nav.classList.remove('active'));
+        });
+
+        // Show Section
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === sectionId) {
+                    section.classList.add('active');
+                }
+            });
+        }
+
+        // Load Marketplace Products
+        function loadMarketplaceProducts() {
+            marketplaceProducts.innerHTML = '';
+            products.forEach(product => {
+                marketplaceProducts.innerHTML += `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}" class="product-img">
+                        <div class="product-info">
+                            <h4>${product.name}</h4>
+                            <p>${product.location} • ${product.demand} demand</p>
+                            <div class="product-price">₦${product.price.toLocaleString()}/${product.unit}</div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary btn-sm" onclick="sellProduct(${product.id})">Sell Now</button>
+                                <button class="btn btn-outline btn-sm">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Load User's Products
+        function loadUserProducts() {
+            myProductsList.innerHTML = '';
+            if (userProducts.length === 0) {
+                myProductsList.innerHTML = '<p>You have no listed products yet.</p>';
+            } else {
+                userProducts.forEach(product => {
+                    myProductsList.innerHTML += `
+                        <div class="product-card">
+                            <img src="${product.image}" alt="${product.name}" class="product-img">
+                            <div class="product-info">
+                                <h4>${product.name}</h4>
+                                <p>${product.location} • Listed on ${product.listedDate}</p>
+                                <div class="product-price">₦${product.price.toLocaleString()}/${product.unit}</div>
+                                <p>${product.description}</p>
+                                <div class="product-actions">
+                                    <button class="btn btn-primary btn-sm">Edit</button>
+                                    <button class="btn btn-outline btn-sm" onclick="removeProduct(${product.id})">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Remove Product
+        function removeProduct(productId) {
+            if (confirm('Are you sure you want to remove this product?')) {
+                userProducts = userProducts.filter(product => product.id !== productId);
+                loadUserProducts();
+            }
+        }
+
+        // Load Agro Hub Products
+        function loadAgroHubProducts() {
+            agrohubProducts.innerHTML = '';
+            agroHubProducts.forEach(product => {
+                agrohubProducts.innerHTML += `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}" class="product-img">
+                        <div class="product-info">
+                            <h4>${product.name}</h4>
+                            <p>${product.description}</p>
+                            <div class="product-price">${product.price > 0 ? '₦' + product.price.toLocaleString() + '/' + product.unit : 'Contact for pricing'}</div>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary btn-sm">${product.type === 'financing' ? 'Apply Now' : 'Buy Now'}</button>
+                                <button class="btn btn-outline btn-sm">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Load Logistics Data
+        function loadLogisticsData() {
+            logisticsData.innerHTML = '';
+            logistics.forEach(item => {
+                let statusClass = '';
+                if (item.status === 'delivered') statusClass = 'status-delivered';
+                else if (item.status === 'shipped') statusClass = 'status-shipped';
+                else statusClass = 'status-pending';
+                
+                logisticsData.innerHTML += `
+                    <tr>
+                        <td>${item.id}</td>
+                        <td>${item.product}</td>
+                        <td>${item.destination}</td>
+                        <td><span class="status ${statusClass}">${item.status}</span></td>
+                        <td>${item.date}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Sell Product Function
+        function sellProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                if (confirm(`Do you want to sell ${product.name} at ₦${product.price.toLocaleString()} per ${product.unit}?`)) {
+                    alert(`You've successfully listed ${product.name} for sale! Buyers will contact you shortly.`);
+                }
+            }
+        }
+
+        // Fetch weather data (mock for demo)
+        function fetchWeather() {
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('current-temp').textContent = '28°C';
+                document.getElementById('humidity').textContent = '65%';
+                document.getElementById('wind-speed').textContent = '12 km/h';
+                document.getElementById('rain-chance').textContent = '20%';
+                document.getElementById('forecast-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }, 500);
+        }
+
+        // Profile Picture Upload
+        userAvatar.addEventListener('click', () => {
+            profilePicUpload.click();
+        });
+
+        profilePicUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    userAvatar.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Edit Name Functionality
+        editNameBtn.addEventListener('click', () => {
+            editNameForm.style.display = 'block';
+            userNameDisplay.style.display = 'none';
+            newNameInput.value = userNameDisplay.textContent.replace('✎', '').trim();
+        });
+
+        saveNameBtn.addEventListener('click', () => {
+            const newName = newNameInput.value.trim();
+            if (newName) {
+                userNameDisplay.textContent = newName + ' ';
+                welcomeMessage.textContent = `Welcome Back, ${newName}`;
+                editNameForm.style.display = 'none';
+                userNameDisplay.style.display = 'block';
+                
+                // Re-add the edit button
+                const editBtn = document.createElement('button');
+                editBtn.className = 'edit-name-btn';
+                editBtn.id = 'edit-name-btn';
+                editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                userNameDisplay.appendChild(editBtn);
+                
+                // Re-attach event listener
+                document.getElementById('edit-name-btn').addEventListener('click', () => {
+                    editNameForm.style.display = 'block';
+                    userNameDisplay.style.display = 'none';
+                    newNameInput.value = userNameDisplay.textContent.replace('✎', '').trim();
+                });
+            }
+        });
+
+        cancelEditBtn.addEventListener('click', () => {
+            editNameForm.style.display = 'none';
+            userNameDisplay.style.display = 'block';
+        });
+    </script>
+    <!-- <script src="login.js"></script> -->
+</body>
+</html>
