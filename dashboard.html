@@ -1297,37 +1297,133 @@
       </section>
 
       <!-- Logistics Section -->
-      <section id="logistics" class="section">
+      <!-- <section id="logistics" class="section">
         <div class="card">
           <div class="card-header">
             <h3>Shipping companies</h3>
           </div>
         </div>
-      </section>
-      <section id="logistics" class="section">
-        <div class="card">
-          <div class="card-header">
-            <h3>Your Shipments</h3>
-            <a href="#" class="nav-link" data-section="dashboard"
-              ><i class="fas fa-arrow-left"></i> Back to Dashboard</a
-            >
-          </div>
-          <table class="logistics-table">
-            <thead>
-              <tr>
-                <th>Tracking ID</th>
-                <th>Product</th>
-                <th>Destination</th>
-                <th>Status</th>
-                <th>Estimated Delivery</th>
-              </tr>
-            </thead>
-            <tbody id="logistics-data">
-              <!-- Logistics data will be loaded here -->
-            </tbody>
-          </table>
-        </div>
-      </section>
+      </section> -->
+     
+     <!-- Updated Logistics Section -->
+<section id="logistics" class="section">
+  <div class="card">
+    <div class="card-header">
+      <h3>Shipping Companies in Africa</h3>
+      <a href="#" class="nav-link" data-section="dashboard"
+        ><i class="fas fa-arrow-left"></i> Back to Dashboard</a
+      >
+    </div>
+    <div class="table-container">
+      <table class="market-table">
+        <thead>
+          <tr>
+            <th>Company Name</th>
+            <th>Headquarters</th>
+            <th>Countries Covered</th>
+            <th>Specialization</th>
+            <th>Website</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Maersk Africa</td>
+            <td>Copenhagen, Denmark</td>
+            <td>Pan-Africa</td>
+            <td>Container shipping, logistics</td>
+            <td><a href="https://www.maersk.com" target="_blank">maersk.com</a></td>
+          </tr>
+          <tr>
+            <td>Grimaldi Group</td>
+            <td>Naples, Italy</td>
+            <td>West Africa, Southern Africa</td>
+            <td>Roll-on/roll-off, container</td>
+            <td><a href="https://www.grimaldi.napoli.it" target="_blank">grimaldi.napoli.it</a></td>
+          </tr>
+          <tr>
+            <td>DHL Global Forwarding Africa</td>
+            <td>Bonn, Germany</td>
+            <td>Pan-Africa</td>
+            <td>Air freight, logistics</td>
+            <td><a href="https://www.dhl.com" target="_blank">dhl.com</a></td>
+          </tr>
+          <tr>
+            <td>CMA CGM Africa</td>
+            <td>Marseille, France</td>
+            <td>Pan-Africa</td>
+            <td>Container shipping</td>
+            <td><a href="https://www.cma-cgm.com" target="_blank">cma-cgm.com</a></td>
+          </tr>
+          <tr>
+            <td>Mediterranean Shipping Company (MSC)</td>
+            <td>Geneva, Switzerland</td>
+            <td>Pan-Africa</td>
+            <td>Container shipping</td>
+            <td><a href="https://www.msc.com" target="_blank">msc.com</a></td>
+          </tr>
+          <tr>
+            <td>Bolloré Africa Logistics</td>
+            <td>Puteaux, France</td>
+            <td>West & Central Africa</td>
+            <td>Port operations, logistics</td>
+            <td><a href="https://www.bollore-africa-logistics.com" target="_blank">bollore-africa-logistics.com</a></td>
+          </tr>
+          <tr>
+            <td>Safmarine (Maersk)</td>
+            <td>Cape Town, South Africa</td>
+            <td>Pan-Africa</td>
+            <td>Container shipping</td>
+            <td><a href="https://www.safmarine.com" target="_blank">safmarine.com</a></td>
+          </tr>
+          <tr>
+            <td>Transnet Port Terminals</td>
+            <td>Johannesburg, South Africa</td>
+            <td>Southern Africa</td>
+            <td>Port operations</td>
+            <td><a href="https://www.transnet.net" target="_blank">transnet.net</a></td>
+          </tr>
+          <tr>
+            <td>Nile Dutch Africa Line</td>
+            <td>Rotterdam, Netherlands</td>
+            <td>West Africa</td>
+            <td>Container shipping</td>
+            <td><a href="https://www.niledutch.com" target="_blank">niledutch.com</a></td>
+          </tr>
+          <tr>
+            <td>GAC Group Africa</td>
+            <td>Dubai, UAE</td>
+            <td>Pan-Africa</td>
+            <td>Shipping, logistics</td>
+            <td><a href="https://www.gac.com" target="_blank">gac.com</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+      <h3>Your Shipments</h3>
+    </div>
+    <h3>You have no shipment!</h3>
+    <!-- <table class="logistics-table">
+      <thead>
+        <tr>
+          <th>Tracking ID</th>
+          <th>Product</th>
+          <th>Destination</th>
+          <th>Status</th>
+          <th>Estimated Delivery</th>
+        </tr>
+      </thead>
+      <tbody id="logistics-data">
+        <!-- Logistics data will be loaded here -->
+      <!-- </tbody>
+    </table> --> 
+  </div>
+</section>
+     
+     
 
       <!-- Financing Section -->
       <section id="buy" class="section">
@@ -1543,7 +1639,7 @@
 
     <script>
  document.getElementById("set").addEventListener('click', function(){
-            alert('You can only update your image until this account has been verified and approved by our admin')
+            alert('You can unly update your image until this account has been verified and approved by our admin')
         })
 
         document.getElementById("kyc").addEventListener('click', function(){
@@ -1620,7 +1716,7 @@
           unit: "pack",
           description: "High yield maize seeds, resistant to drought",
           image:
-            "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+            "images/maize.jpg",
         },
         {
           id: 102,
@@ -1630,7 +1726,7 @@
           unit: "bag",
           description: "100% organic fertilizer for improved yield",
           image:
-            "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+            "images/fet.jpg",
         },
         {
           id: 103,
@@ -1640,7 +1736,7 @@
           unit: "set",
           description: "Complete set of farming tools for smallholders",
           image:
-            "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+            "images/tool.jpg",
         },
         {
           id: 104,
@@ -1650,7 +1746,7 @@
           unit: "N/A",
           description: "Low-interest loans for farm expansion and equipment",
           image:
-            "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+            "images/loan.jpg",
         },
       ];
 
